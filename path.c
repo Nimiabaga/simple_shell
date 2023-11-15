@@ -15,10 +15,30 @@ char *find_full_path(const char *command)
 
 	if (path_env == NULL)
 	{
-	fprintf(stderr, "PATH environment variable is not set\n");
-}
-	folder = strtok(NULL, ":");
+		fprintf(stderr, "PATH environment variable is not set\n");
+		return (NULL);
+	}
+	clone_path = strdup(path_env);
+	if (clone_path == NULL)
+	{
+		perror("Memory allocation failed");
+		return (NULL);
+	}
+	folder = strtok(clone_path, ":");
+
+	while (folder != NULL)
+	{
+		char full_path[1024];
+
+		snprintf(full_path, sizeof(full_path), "%s/%s", folder, command);
+		if (access(full_path, X_OK) == 0)
+		{
+			free(clone_path);
+			return (strdup(full_path));
+		}
+		folder = strtok(NULL, ":");
 	}
 	free(clone_path);
 	return (NULL);
 }
+

@@ -1,3 +1,8 @@
+#ifndef SHELL_H
+#define SHELL_H
+
+#include <stdio.h>
+#include <stdlib.h>
 #include <unistd.h>
 #include <string.h>
 #include <sys/wait.h>
@@ -7,40 +12,23 @@
 
 #define MAX_LINE_LENGTH 1024
 
-
-
-void handle_script_mode(int argc, char argv[]);
-void run_command(charcommand, char arguments);
-
-char find_full_path(const charcommand);
-int startsWith(const char str, const charprefix);
-
-void process_cmdline(char input_line);
-int my_builtins(char cmd);
-int execute_setenv(const char env_variable, const chardata);
+void handle_script_mode(int argc, char *argv[]);
+void run_command(char *command, char **arguments);
+char *find_full_path(const char *command);
+int startsWith(const char *str, const char *prefix);
+void process_cmdline(char **input_line);
+int my_builtins(char **cmd);
+int execute_setenv(const char *env_variable, const char *data);
 int execute_unsetenv(const char *env_variable);
-void execute_env(char args);
-char my_getline();
+void execute_env(char **args);
+char *my_getline();
 void my_cd(char **args);
-void tokenize_input(chardata_input);
-extern char environ;
+void tokenize_input(char *data_input);
+int user_input(char **input, size_t *data);
+void handle_script_mode(int argc, char *argv[]);
+void my_exit(char **args, int *status);
+void exit_shell(int status);
+extern char **environ;
 
-
-int user_input(char input, size_t data);
-
-
-
-void handle_script_mode(int argc, charargv[]);
-void my_exit(char args, int *status);
-void exit_shell();
-void my_cd(char args);
-
-void run_command(char command, char **arguments);
-
-charfind_full_path(const char command);
-int startsWith(const charstr, const char prefix);
-
-
-
-#endif / SHELL_H */
+#endif /* SHELL_H */
 
