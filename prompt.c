@@ -2,6 +2,9 @@
 
 /**
  * user_input - Read and parse user input.
+ * This function takes a pointer to the input line buffer and the size of the
+ * input buffer as parameters. It is responsible for reading user input and
+ * parsing it as needed
  * @input: Pointer to the input line buffer.
  * @data: Size of the input buffer.
  *
